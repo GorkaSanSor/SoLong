@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:15:32 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/19 16:31:35 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:54:14 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,26 @@ typedef struct s_pos
 }	t_pos;
 
 /*--------------------------------error_exit.c--------------------------------*/
-int	ft_check_extension(t_data *game, char *str);
+int		ft_check_extension(t_data *game, char *str);
 void	ft_free_map(char **map);
-int	ft_exit_ok(t_data *game);
+int		ft_exit_ok(t_data *game);
 void	ft_error_exit(int err_type, t_data *game);
 
 /*--------------------------------error_utils.c-------------------------------*/
 char	ft_get_object(char **map, char c);
-int	ft_check_floodfill(char **map_cpy);
+int		ft_check_floodfill(char **map_cpy);
+void	ft_fill(char **map_copy, t_pos map_data, int x, int y);
 
 /*----------------------------------map_error.c-------------------------------*/
-int	ft_map_iserror(t_data *game);
+int		ft_map_iserror(t_data *game);
 
 /*------------------------------------map.c-----------------------------------*/
-int	ft_line_lenght(char *str);
+int		ft_line_lenght(char *str);
 void	ft_save_map(t_data *game, char *str);
 char	**ft_map_fill(int *rows, char *str);
 
 /*----------------------------------movement.c--------------------------------*/
-int	ft_input(int key, t_data *game);
+int		ft_input(int key, t_data *game);
 
 /*----------------------------------textures.c--------------------------------*/
 void	ft_scan_map(t_data *game);

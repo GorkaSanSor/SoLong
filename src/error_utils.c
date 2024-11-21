@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:44:46 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/19 16:32:02 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/21 11:52:26 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,20 @@ the position is a wall '1'. Every time it visits a position, it marks it as
 'V' (visited), which is also a condition to stop filling.
 */
 
-void	ft_floodfill(char **map_copy, t_pos map_data, int x, int y)
+void	ft_fill(char **map_copy, t_pos map_data, int x, int y)
 {
-	
+	if (x >= map_data.size_x || y >= map_data.size_y \
+	|| map_copy[y][x] == '1' || map_copy[y][x] == 'V')
+		return ;
+	else
+	{
+		map_copy[y][x] = 'V';
+		ft_fill(map_copy, map_data, x + 1, y);
+		ft_fill(map_copy, map_data, x - 1, y);
+		ft_fill(map_copy, map_data, x, y + 1);
+		ft_fill(map_copy, map_data, x, y - 1);
+	}
+	return ;
 }
 
 /*

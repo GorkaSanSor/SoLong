@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:53:08 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/19 16:11:54 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:03:00 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,8 @@ int	ft_map_iserror(t_data *game)
 		return (ft_error_exit(INVALID_MAP, game), 1);
 	if (ft_map_walls(game->map) == 1)
 		return (ft_error_exit(INVALID_WALLS, game), 1);
+	if (ft_right_obj(game->map, 'P') == 1 || ft_right_obj(game->map, 'E') \
+		|| ft_right_obj(game->map, 'C') == 1)
+		return (ft_error_exit(INVALID_OBJECTS, game), 1);
 	return (0);
 }
