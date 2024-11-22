@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:05:20 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 10:41:05 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:27:38 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_init_game(t_data *game)
 {
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, (ft_line_lenght(game->map[0]) \
-	* 80), ((game->map_rows) * 80), "Best 2D Game Ever!");
+	* 80), ((game->map_rows) * 64), "Best 2D Game Ever!");
 	ft_scan_map(game);
 	mlx_key_hook(game->window, *ft_input, game);
 	mlx_hook(game->window, 17, 1L << 17, ft_exit_ok, game);

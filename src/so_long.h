@@ -6,14 +6,12 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:15:32 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 13:03:18 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:43:09 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
-# define TILE_SIZE 64
 
 #include <stdlib.h>
 #include <fcntl.h>
@@ -24,7 +22,6 @@
 #include "../mlx_linux/mlx.h"
 #include "../my_lib/ft_printf/ft_printf.h"
 #include "../my_lib/get_next_line/gnl.h"
-//#include "../my_lib/libft/libft.h"
 
 /*---------------------------------ERROR TYPES--------------------------------*/
 
@@ -72,7 +69,7 @@ typedef struct s_data
 	int			p_x_copy;
 	int			p_y_copy;
 	int			final_move;
-	t_textures	textures; // Añadimos las texturas aquí
+	t_textures	textures;
 }	t_data;
 
 

@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:03:34 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 13:40:34 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:00:28 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ static void	ft_move_player(t_data *game, int *x, int *y, char direction)
 	int		img_height;
 	void	*img;
 	void	*img2;
-	
+
 	if (game->map[*y][*x] == 'C')
 		game->map[*y][*x] = '0';
-	//ft_unlock_exit()
+	// ft_unlock_exit()
 	img = mlx_xpm_file_to_image(game->mlx, FLOOR, &img_width, &img_height);
-	mlx_put_image_to_window(game->mlx, game->window, img, (*x * 64), (*y * 64));
+	mlx_put_image_to_window(game->mlx, game->window, img, (*x * 80), (*y * 80));
 	if (game->map[*y][*x] == 'E')
 	{
 		img2 = mlx_xpm_file_to_image(game->mlx, EXIT, &img_width, &img_height);
-		mlx_put_image_to_window(game->mlx, game->window, img2, (*x * 64), \
-		(*y * 64));
+		mlx_put_image_to_window(game->mlx, game->window, img2, (*x * 80), \
+		(*y * 80));
 	}
 	ft_print_player(game, x, y, direction);
 }
@@ -59,12 +59,32 @@ This function checks if the player reached a wall. Checks every direction
 related to the key pressed and returns 0 or 1 depending on wheather the
 movement was possible or not
 */
-/*
+
 static int	ft_player_stop(t_data *game, int x, int y, char direction)
 {
-	
+	if (direction == 'U')
+	{
+		if (game->map[y - 1][x] == '1')
+			return (1);
+	}
+	if (direction == 'D')
+	{
+		if (game->map[y + 1][x] == '1')
+			return (1);
+	}
+	if (direction == 'L')
+	{
+		if (game->map[y][x - 1] == '1')
+			return (1);
+	}
+	if (direction == 'R')
+	{
+		if (game->map[y][x + 1] == '1')
+			return (1);
+	}
+	return (0);
 }
-*/
+
 /*
 This function gets the initial position of the player the first time it runs.
 Step 1. Check if the player moved or not and returns if it did not.
@@ -84,8 +104,8 @@ static int	ft_movement(t_data *game, char direction)
     }
     if (!direction)
         return (0);
-    /*if (ft_player_stop(game, x, y, direction) == 1)
-		return (0);*/
+    if (ft_player_stop(game, x, y, direction) == 1)
+		return (0);
 	ft_move_player(game, &x, &y, direction);
     return (1);
 }

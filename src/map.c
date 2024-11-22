@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:18:47 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/21 13:14:26 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:36:23 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ void	ft_save_map(t_data *game, char *str)
 	line = gnl(fd);
 	while (line)
 	{
+		rows++;
 		free(line);
 		line = gnl(fd);
-		rows++;
 	}
-	free(line);
+	if (line)
+		free(line);
+	close(fd);
 	game->map_rows = rows;
 	game->map = ft_map_fill(&rows, str);
 }
@@ -96,7 +98,7 @@ char	**ft_map_fill(int *rows, char *str)
 		map[row][row_len] = '\0';
 		row++;
 	}
-	map[row] = 0;
+	map[row] = NULL;
 	close(fd);
 	return (map);
 }
