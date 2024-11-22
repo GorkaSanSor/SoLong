@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:44:46 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 10:11:08 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:56:28 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,26 +119,27 @@ void	ft_find_player(char **map, t_pos *map_data)
 			{
 				map_data->p_x = x;
 				map_data->p_y = y;
+				return ;
 			}
 			x++;
 		}
 		y++;
 	}
-	map_data->size_y = y;
-	map_data->size_x = x;
+	map_data->p_x = -1;
+	map_data->p_y = -1;
 	return ;
 }
 
 /*
 This function makes a copy of the map. It is an array of pointers,
 each pointer points to a string. The logic is similar to ft_split
-i is the counter of the first level of pointers (or number of rows)
-j is an aux counter to loop and save all the lines
+rows is the counter of the first level of pointers (or number of rows)
+i is an aux counter to loop and save all the lines
 
-i = 0		| * |			*| 1 |	| 1 |	| 1 |
-i = 1		| * |			*| 1 |	| 1 |	| 1 |
-...			| * |			*| 1 |	| 1 |	| 1 |
-i = n		| * |			*| 1 |	| 1 |	| 1 |
+rows = 0		| * |			*| 1 |	| 1 |	| 1 |
+rows = 1		| * |			*| 1 |	| 1 |	| 1 |
+... 			| * |			*| 1 |	| 1 |	| 1 |
+rows = n		| * |			*| 1 |	| 1 |	| 1 |
 
 First, allocate memory for the array of pointers
 Second, loop and duplicate all the lines of the map (arrays of chars)
@@ -149,20 +150,26 @@ char	**ft_copy_map(char **map)
 {
 	char	**map_copy;
 	int		i;
-	int		j;
-	
-	i = 0;
-	while (map[i])
-		i++;
-	map_copy = (char **)malloc((i + 1) * sizeof(char *));
+	int		rows;
+
+	rows = 0;
+	while (map[rows])
+		rows++;
+	map_copy = malloc((rows + 1) * sizeof(char *));
 	if (!map_copy)
-		return (0);
-	j = 0;
-	while (j < i)
+		return (NULL);
+	i = 0;
+	while (i < rows)
 	{
-		map_copy[j] = ft_strdup(map[j]);
-		j++;
+		map_copy[i] = ft_strdup(map[i]);
+		if (!map_copy[i])
+		{
+			ft_free_map(map_copy);
+			return (NULL);
+		}
+		i++;
 	}
-	map_copy = '\0';	
+	map_copy[i] = NULL;
 	return (map_copy);
 }
+

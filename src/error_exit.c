@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:58:54 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/19 13:51:01 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:33:50 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ void	ft_error_exit(int err_type, t_data *game)
 		ft_printf("Error\nInvalid map, there is not an exit.\n"), exit(1);
 	if (err_type == EMPTY_MAP)
 		ft_game_free(game), ft_printf("Error\nInvalid map, \
-		it`s empty.\n"), exit(1);
+it`s empty.\n"), exit(1);
 	if (err_type == INVALID_MAP)
 		ft_game_free(game), ft_printf("Error\nInvalid map, \
-		must be rectangle.\n"), exit(1);
+must be rectangle.\n"), exit(1);
 	if (err_type == INVALID_WALLS)
 		ft_game_free(game), ft_printf("Error\nInvalid map, \
-		must be surrounded by walls.\n"), exit(1);
+must be surrounded by walls.\n"), exit(1);
 	if (err_type == INVALID_FLOOR)
 		ft_game_free(game), ft_printf("Error\nInvalid map, \
-		the floor must be '0'.\n"), exit(1);
+the floor must be '0'.\n"), exit(1);
 	if (err_type == INVALID_OBJECTS)
 		ft_game_free(game), ft_printf("Error\nInvalid object type or \
 	number. Allowed types and count: P = 1, E = 1, C >= 1\n"), exit(1);

@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:22:39 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 10:42:12 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:39:31 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ coordinates in the map_data struct and copies them to the game struct
 void	ft_copy_player_pos(t_data *game, t_pos *map_data)
 {
 	game->p_x_copy = map_data->p_x;
-	game->p_x_copy = map_data->p_y;
+	game->p_y_copy = map_data->p_y;
 }
 
 /*
