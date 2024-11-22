@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:15:32 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 10:52:46 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:03:18 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ char	**ft_map_fill(int *rows, char *str);
 int		ft_map_floor(char **map);
 
 /*---------------------------------move_utils.c-------------------------------*/
+char	*ft_player_look(char direction);
+int		ft_print_player(t_data *game, int *x, int *y, char direction);
 void	ft_copy_player_pos(t_data *game, t_pos *map_data);
 
 /*----------------------------------movement.c--------------------------------*/
