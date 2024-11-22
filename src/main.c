@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:05:20 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/19 16:01:12 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 10:41:05 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 		if (ft_check_extension(&game, argv[1]) == 1)
 			return (1);
 		ft_save_map(&game, argv[1]);
-		if (ft_map_iserror(&game) == 1)
+		if (ft_map_is_error(&game) == 1)
 			return (1);
 		ft_init_game(&game);
 	}

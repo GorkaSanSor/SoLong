@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:18:47 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/19 15:00:07 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:14:26 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,3 +107,24 @@ by the subject. It loops all the positions within the wall. If it finds a
 char that is not allowed, the function returns 1 as error.
 */
 
+int	ft_map_floor(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '1' || map[i][j] == '0' || map[i][j] == 'P' \
+			|| map[i][j] == 'C' || map[i][j] == 'E' || map[i][j] == '\n')
+				j++;
+			else
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}

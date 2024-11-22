@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:15:32 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/21 11:54:14 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 10:42:20 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,22 @@ void	ft_error_exit(int err_type, t_data *game);
 
 /*--------------------------------error_utils.c-------------------------------*/
 char	ft_get_object(char **map, char c);
-int		ft_check_floodfill(char **map_cpy);
+int		ft_check_fill(char **map_cpy);
 void	ft_fill(char **map_copy, t_pos map_data, int x, int y);
+void	ft_find_player(char **map, t_pos *map_data);
+char	**ft_copy_map(char **map);
 
 /*----------------------------------map_error.c-------------------------------*/
-int		ft_map_iserror(t_data *game);
+int		ft_map_is_error(t_data *game);
 
 /*------------------------------------map.c-----------------------------------*/
 int		ft_line_lenght(char *str);
 void	ft_save_map(t_data *game, char *str);
 char	**ft_map_fill(int *rows, char *str);
+int		ft_map_floor(char **map);
+
+/*---------------------------------move_utils.c-------------------------------*/
+void	ft_copy_player_pos(t_data *game, t_pos *map_data);
 
 /*----------------------------------movement.c--------------------------------*/
 int		ft_input(int key, t_data *game);

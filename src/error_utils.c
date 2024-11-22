@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:44:46 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/21 11:52:26 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 10:11:08 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /*
 This function loops every position of the 2D map with a double loop
 and counts the number of occurrences of char c
-i is the counter of rows.
-j is the counter of colums (i.e., positions in every row)
+counter of rows.
+counter of colums (i.e., positions in every row)
 Loop the whole map at once until the final '\0'
 */
 
@@ -39,7 +39,7 @@ char	ft_get_object(char **map, char c)
 		}
 		rows++;
 	}
-	return (0);
+	return (count);
 }
 
 /*
@@ -50,7 +50,7 @@ i is the counter of rows (Y)
 j is the counter of colums (X)
 */
 
-int	ft_check_floodfill(char **map_cpy)
+int	ft_check_fill(char **map_cpy)
 {
 	int	rows;
 	int	cols;
@@ -103,6 +103,31 @@ When it finds 'P' it saves the values of the player position in the struct
 It continues reading all the map and then saves the size in the struct
 */
 
+void	ft_find_player(char **map, t_pos *map_data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	x = 0;
+	while(map[y])
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			if (map[y][x] == 'P')
+			{
+				map_data->p_x = x;
+				map_data->p_y = y;
+			}
+			x++;
+		}
+		y++;
+	}
+	map_data->size_y = y;
+	map_data->size_x = x;
+	return ;
+}
 
 /*
 This function makes a copy of the map. It is an array of pointers,
@@ -120,4 +145,24 @@ Second, loop and duplicate all the lines of the map (arrays of chars)
 Place NULL at the end of the array of pointers
 */
 
-
+char	**ft_copy_map(char **map)
+{
+	char	**map_copy;
+	int		i;
+	int		j;
+	
+	i = 0;
+	while (map[i])
+		i++;
+	map_copy = (char **)malloc((i + 1) * sizeof(char *));
+	if (!map_copy)
+		return (0);
+	j = 0;
+	while (j < i)
+	{
+		map_copy[j] = ft_strdup(map[j]);
+		j++;
+	}
+	map_copy = '\0';	
+	return (map_copy);
+}

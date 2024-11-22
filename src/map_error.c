@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:53:08 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/21 12:03:00 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/22 10:42:00 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,22 @@ Note that we send the address of the structure because it was created in
 this function
 */
 
+static int	ft_path_is_ok(t_data *game)
+{
+	char	**map_copy;
+	t_pos	map_data;
+
+	map_copy = ft_copy_map(game->map);
+	ft_find_player(map_copy, &map_data);
+	ft_fill(map_copy, map_data, map_data.p_x, map_data.p_y);
+	if (ft_check_fill(map_copy) == 1)
+	{
+		ft_free_map(map_copy);
+		return (1);
+	}
+	ft_copy_player_pos(game, &map_data);
+	return (0);
+}
 
 /*
 This function will check the different errors in the map
@@ -115,7 +131,7 @@ Step 3. Check Player (P), Collectibles (C) and Exit (E)
 Step 4. There must be a valid path to collect and exit
 */
 
-int	ft_map_iserror(t_data *game)
+int	ft_map_is_error(t_data *game)
 {
 	int i;
 
@@ -126,8 +142,12 @@ int	ft_map_iserror(t_data *game)
 		return (ft_error_exit(INVALID_MAP, game), 1);
 	if (ft_map_walls(game->map) == 1)
 		return (ft_error_exit(INVALID_WALLS, game), 1);
+	if (ft_map_floor(game->map) == 1)
+		return (ft_error_exit(INVALID_FLOOR, game), 1);
 	if (ft_right_obj(game->map, 'P') == 1 || ft_right_obj(game->map, 'E') \
 		|| ft_right_obj(game->map, 'C') == 1)
 		return (ft_error_exit(INVALID_OBJECTS, game), 1);
+	if (ft_path_is_ok(game) == 1)
+		return (ft_error_exit(INVALID_PATH, game), 1);
 	return (0);
 }
