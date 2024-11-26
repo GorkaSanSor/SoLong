@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:05:20 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/25 15:23:15 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:21:53 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int	main(int argc, char **argv)
 		ft_init_game(&game);
 	}
 	ft_error_exit(WRONG_ARGS, &game);
+	ft_exit_ok(&game);
 	return (0);
 }

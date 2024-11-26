@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:58:54 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/26 11:46:10 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:19:24 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	ft_exit_ok(t_data *game)
 {
 	if (game->mlx && game->window)
 		mlx_destroy_window(game->mlx, game->window);
+	if (game->mlx)
+        mlx_destroy_display(game->mlx);
 	ft_game_free(game);
 	exit(0);
 	return (0);
