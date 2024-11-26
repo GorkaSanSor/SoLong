@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:44:46 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 11:56:28 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:10:14 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,30 @@ i is the counter of rows (Y)
 j is the counter of colums (X)
 */
 
-int	ft_check_fill(char **map_cpy)
+int ft_check_floodfill(char **map_copy) 
 {
-	int	rows;
-	int	cols;
-	
-	rows = 0;
-	while (map_cpy[rows])
+	int i;
+	int j;
+
+	i = 0;
+	while (map_copy[i]) 
 	{
-		cols = 0;
-		while (map_cpy[rows][cols] != '\0')
+		j = 0;
+		while (map_copy[i][j] != '\0') 
 		{
-			if (map_cpy[rows][cols] == 'C' || map_cpy[rows][cols] == 'E')
-				return (1);
-			cols++;
+			// Revisa si la celda contiene un objeto (C o E)
+			if (map_copy[i][j] == 'C' || map_copy[i][j] == 'E') 
+			{
+				ft_printf("Found object at (%d, %d)\n", i, j);  // Debugging
+				return (1);  // Found the object
+			}
+			j++;
 		}
-		rows++;
+		i++;
 	}
-	return (0);
+	return (0);  // No object found
 }
+
 
 /*
 This is the floodfill standard algorithm. It is a recursive method that fills
@@ -78,20 +83,18 @@ the position is a wall '1'. Every time it visits a position, it marks it as
 'V' (visited), which is also a condition to stop filling.
 */
 
-void	ft_fill(char **map_copy, t_pos map_data, int x, int y)
+void ft_floodfill(char **map_copy, t_pos map_data, int x, int y)
 {
-	if (x >= map_data.size_x || y >= map_data.size_y \
-	|| map_copy[y][x] == '1' || map_copy[y][x] == 'V')
+	if (x < 0 || y < 0 || x >= map_data.size_x || y >= map_data.size_y)
 		return ;
-	else
-	{
-		map_copy[y][x] = 'V';
-		ft_fill(map_copy, map_data, x + 1, y);
-		ft_fill(map_copy, map_data, x - 1, y);
-		ft_fill(map_copy, map_data, x, y + 1);
-		ft_fill(map_copy, map_data, x, y - 1);
-	}
-	return ;
+	if (map_copy[y][x] == '1' || map_copy[y][x] == 'V')
+		return ;
+	map_copy[y][x] = 'V';
+
+	ft_floodfill(map_copy, map_data, x + 1, y);
+	ft_floodfill(map_copy, map_data, x - 1, y);
+	ft_floodfill(map_copy, map_data, x, y + 1);
+	ft_floodfill(map_copy, map_data, x, y - 1);
 }
 
 /*
@@ -118,15 +121,15 @@ void	ft_find_player(char **map, t_pos *map_data)
 			if (map[y][x] == 'P')
 			{
 				map_data->p_x = x;
-				map_data->p_y = y;
+				map_data->p_y = y; 
 				return ;
 			}
 			x++;
 		}
 		y++;
 	}
-	map_data->p_x = -1;
-	map_data->p_y = -1;
+	map_data->p_x = x;
+	map_data->p_y = y;
 	return ;
 }
 
@@ -152,6 +155,8 @@ char	**ft_copy_map(char **map)
 	int		i;
 	int		rows;
 
+	if (!map)
+    return (NULL);
 	rows = 0;
 	while (map[rows])
 		rows++;
@@ -172,4 +177,3 @@ char	**ft_copy_map(char **map)
 	map_copy[i] = NULL;
 	return (map_copy);
 }
-

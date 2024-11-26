@@ -6,7 +6,7 @@
 #    By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:23:21 by gsantill          #+#    #+#              #
-#    Updated: 2024/11/21 13:21:23 by gsantill         ###   ########.fr        #
+#    Updated: 2024/11/22 16:16:02 by gsantill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 # Libraries
 PRINTF_PATH = $(LIBS_DIR)/ft_printf
-GNL_PATH = $(LIBS_DIR)/get_next_line
+GNL_PATH = $(LIBS_DIR)/ft_gnl
 
 PRINTF_A = $(PRINTF_PATH)/libftprintf.a
 GNL_A = $(GNL_PATH)/gnl.a

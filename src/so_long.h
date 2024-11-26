@@ -6,22 +6,22 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:15:32 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 15:43:09 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:19:30 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <stdlib.h>
-#include <fcntl.h>
+# include <stdlib.h>
+# include <fcntl.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include "../mlx_linux/mlx.h"
 #include "../my_lib/ft_printf/ft_printf.h"
-#include "../my_lib/get_next_line/gnl.h"
+#include "../my_lib/ft_gnl/gnl.h"
 
 /*---------------------------------ERROR TYPES--------------------------------*/
 
@@ -42,11 +42,12 @@
 # define WALL "./assets/Wall.xpm"
 # define FLOOR "./assets/Floor.xpm"
 # define COLLECT "./assets/Collectible.xpm"
-# define EXIT "./assets/Exit.xpm"
-# define PLAYER_U "./assets/PlayerU.xpm"
-# define PLAYER_D "./assets/PlayerD.xpm"
-# define PLAYER_L "./assets/PlayerL.xpm"
-# define PLAYER_R "./assets/PlayerR.xpm"
+# define EXIT "./assets/Exit_C.xpm"
+# define EXIT_O "./assets/Exit_O.xpm"
+# define PLAYER_U "./assets/PIG_U.xpm"
+# define PLAYER_D "./assets/PIG_D.xpm"
+# define PLAYER_L "./assets/PIG_L.xpm"
+# define PLAYER_R "./assets/PIG_R.xpm"
 
 typedef struct s_textures
 {
@@ -89,8 +90,8 @@ void	ft_error_exit(int err_type, t_data *game);
 
 /*--------------------------------error_utils.c-------------------------------*/
 char	ft_get_object(char **map, char c);
-int		ft_check_fill(char **map_cpy);
-void	ft_fill(char **map_copy, t_pos map_data, int x, int y);
+int		ft_check_floodfill(char **map_cpy);
+void	ft_floodfill(char **map_copy, t_pos map_data, int x, int y);
 void	ft_find_player(char **map, t_pos *map_data);
 char	**ft_copy_map(char **map);
 
@@ -107,6 +108,7 @@ int		ft_map_floor(char **map);
 char	*ft_player_look(char direction);
 int		ft_print_player(t_data *game, int *x, int *y, char direction);
 void	ft_copy_player_pos(t_data *game, t_pos *map_data);
+int		ft_find_c(char **map);
 
 /*----------------------------------movement.c--------------------------------*/
 int		ft_input(int key, t_data *game);

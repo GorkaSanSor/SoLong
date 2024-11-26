@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:53:08 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 11:49:20 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:18:17 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ not rectangular. ft_strlen has been modified to stop reading when a '\n' or
 '\0' (EOF) is found.
 */
 
-static int  ft_map_is_rect(char **map)
+static int	ft_map_is_rect(char **map)
 {
 	int	line;
 	int	line_len;
@@ -103,19 +103,29 @@ Note that we send the address of the structure because it was created in
 this function
 */
 
-static int	ft_path_is_ok(t_data *game)
+static int ft_path_is_ok(t_data *game)
 {
-	char	**map_copy;
-	t_pos	map_data;
+	char    **map_copy;
+	t_pos   map_data;
+	
+	// Calcular automáticamente las dimensiones del mapa
+	map_data.size_y = 0;
+	while (game->map[map_data.size_y])  // Contar filas
+		map_data.size_y++;
+	map_data.size_x = 0;
+	if (game->map[0])  // Obtener columnas de la primera fila
+		map_data.size_x = ft_strlen(game->map[0]);
 
 	map_copy = ft_copy_map(game->map);
 	ft_find_player(map_copy, &map_data);
-	ft_fill(map_copy, map_data, map_data.p_x, map_data.p_y);
-	if (ft_check_fill(map_copy) == 1)
+	ft_floodfill(map_copy, map_data, map_data.p_x, map_data.p_y);
+
+	if (ft_check_floodfill(map_copy) == 1)
 	{
 		ft_free_map(map_copy);
 		return (1);
 	}
+
 	ft_copy_player_pos(game, &map_data);
 	return (0);
 }

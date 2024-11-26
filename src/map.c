@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:18:47 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 15:36:23 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:04:15 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	ft_save_map(t_data *game, char *str)
 		free(line);
 		line = gnl(fd);
 	}
-	if (line)
-		free(line);
 	close(fd);
 	game->map_rows = rows;
 	game->map = ft_map_fill(&rows, str);
@@ -83,7 +81,6 @@ char	**ft_map_fill(int *rows, char *str)
 {
 	char	**map;
 	int		row;
-	int		row_len;
 	int		fd;
 
 	row = 0;
@@ -94,8 +91,8 @@ char	**ft_map_fill(int *rows, char *str)
 	while (row < *rows)
 	{
 		map[row] = gnl(fd);
-		row_len = ft_strlen(map[row]);
-		map[row][row_len] = '\0';
+		if (!map[row])  // Depuración adicional
+            ft_printf("Error reading line %d from the map\n", row);
 		row++;
 	}
 	map[row] = NULL;

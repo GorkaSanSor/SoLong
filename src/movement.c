@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:03:34 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 15:00:28 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:25:32 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,28 @@ final door opens. Notice that we have to check before entering the Door square,
 else we enter the Door square and we would need one more movement to close
 the program
 */
+static void	ft_unlock_exit(t_data *game)
+{
+	int		i;
+	int		j;
+	void	*img;
+	int		img_width;
+	int		img_height;
+
+	if (ft_find_c(game->map) == 0)
+	{
+		img = mlx_xpm_file_to_image(game->mlx, EXIT_O, &img_width, &img_height);
+		j = -1;
+		while (game->map[++j])
+		{
+			i = -1;
+			while (game->map[j][++i])
+				if (game->map[j][i] == 'E')
+					mlx_put_image_to_window(game->mlx, game->window, img, \
+					(i * 80), (j * 80));
+		}
+	}
+}
 
 
 /*
@@ -38,17 +60,18 @@ static void	ft_move_player(t_data *game, int *x, int *y, char direction)
 	int		img_width;
 	int		img_height;
 	void	*img;
-	void	*img2;
 
 	if (game->map[*y][*x] == 'C')
 		game->map[*y][*x] = '0';
-	// ft_unlock_exit()
+	ft_unlock_exit(game);
+	if (game->map[*y][*x] == 'E' && ft_find_c(game->map) == 0)
+		ft_exit_ok(game); // Cierra el programa si no quedan collectibles
 	img = mlx_xpm_file_to_image(game->mlx, FLOOR, &img_width, &img_height);
 	mlx_put_image_to_window(game->mlx, game->window, img, (*x * 80), (*y * 80));
 	if (game->map[*y][*x] == 'E')
 	{
-		img2 = mlx_xpm_file_to_image(game->mlx, EXIT, &img_width, &img_height);
-		mlx_put_image_to_window(game->mlx, game->window, img2, (*x * 80), \
+		img = mlx_xpm_file_to_image(game->mlx, EXIT, &img_width, &img_height);
+		mlx_put_image_to_window(game->mlx, game->window, img, (*x * 80), \
 		(*y * 80));
 	}
 	ft_print_player(game, x, y, direction);
@@ -131,15 +154,15 @@ int	ft_input(int key, t_data *game)
 	if (!i)
 		i = 0;
 	move_flag = 0;
-	if (key == 27)
+	if (key == XK_Escape)
 		ft_exit_ok(game);
-	if (key == 97)
+	if (key == XK_Left || key == XK_a)
 		move_flag = ft_movement(game, 'L');
-	if (key == 100)
+	if (key == XK_Right || key == XK_d)
 		move_flag = ft_movement(game, 'R');
-	if (key == 115)
+	if (key == XK_Down || key == XK_s)
 		move_flag = ft_movement(game, 'D');
-	if (key == 119)
+	if (key == XK_Up || key == XK_w)
 		move_flag = ft_movement(game, 'U');
 	if (move_flag == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:22:39 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/22 14:50:47 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:13:10 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,23 @@ void	ft_copy_player_pos(t_data *game, t_pos *map_data)
 /*
 Scans the map to check if there are still collectibles left
 */
+
+int	ft_find_c(char **map)
+{
+	int	x;
+	int y;
+	
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			if (map[y][x] == 'C')
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
