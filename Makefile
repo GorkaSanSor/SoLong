@@ -6,7 +6,7 @@
 #    By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:23:21 by gsantill          #+#    #+#              #
-#    Updated: 2024/11/27 13:30:43 by gsantill         ###   ########.fr        #
+#    Updated: 2024/11/27 15:57:39 by gsantill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ RM = rm -rf
 # Colors
 GREEN_PRE = '\033[32m'
 RED_PRE = '\033[31m'
+CYAN_PRE = '\033[36m'
+MAGENTA_PRE = '\033[35m'
+YELLOW_PRE = '\033[33m'
 RESET_BLACK = '\033[0m'
 
 # Paths
@@ -43,6 +46,39 @@ GNL_A = $(GNL_PATH)/gnl.a
 
 MLX_A = -L$(MLX_DIR) -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
+# ASCII Art
+define SO_LONG
+$(YELLOW_PRE)
+        _______          _____                              
+     ___|\     \    ____|\    \                             
+    |    |\     \  /     /\    \                            
+    |    |/____/| /     /  \    \                           
+ ___|    \|   | ||     |    |    |                          
+|    \    \___|/ |     |    |    |                          
+|    |\     \    |\     \  /    /|                          
+|\ ___\|_____|   | \_____\/____/ |                          
+| |    |     |    \ |    ||    | /                          
+ \|____|_____|     \|____||____|/                           
+    \(    )/          \(    )/                              
+     '    '            '    '                               
+$(CYAN_PRE) 
+ ____                _____  _____   ______         _____    
+|    |          ____|\    \|\    \ |\     \    ___|\    \   
+|    |         /     /\    \\\    \| \     \  /    /\    \  
+|    |        /     /  \    \\|    \  \     ||    |  |____| 
+|    |  ____ |     |    |    ||     \  |    ||    |    ____ 
+|    | |    ||     |    |    ||      \ |    ||    |   |    |
+|    | |    ||\     \  /    /||    |\ \|    ||    |   |_,  |
+|____|/____/|| \_____\/____/ ||____||\_____/||\ ___\___/  /|
+|    |     || \ |    ||    | /|    |/ \|   ||| |   /____ / |
+|____|_____|/  \|____||____|/ |____|   |___|/ \|___|    | / 
+  \(    )/        \(    )/      \(       )/     \( |____|/  
+   '    '          '    '        '       '       '   )/     
+                                                     '
+$(RESET_BLACK)
+endef
+export SO_LONG
+
 # Targets
 all: $(PRINTF_A) $(GNL_A) $(NAME)
 
@@ -60,6 +96,7 @@ $(NAME): $(OBJS)
 	@echo "Compiling so_long"
 	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_A) $(GNL_A) $(MLX_A) -o $(NAME)
 	@echo $(GREEN_PRE)"SO_LONG compiled successfully!"$(RESET_BLACK)
+	@echo "$$SO_LONG"
 
 # Object Files Rule
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
