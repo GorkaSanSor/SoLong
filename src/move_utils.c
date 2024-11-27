@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:22:39 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/25 15:13:10 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:28:55 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	ft_print_player(t_data *game, int *x, int *y, char direction)
 	if (direction == 'R')
 		mlx_put_image_to_window(game->mlx, game->window, \
 		img, (++(*x)) * 80, (*y * 80));
+	mlx_destroy_image(game->mlx, img);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:15:32 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/26 11:19:30 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 09:54:29 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		ft_find_c(char **map);
 int		ft_input(int key, t_data *game);
 
 /*----------------------------------textures.c--------------------------------*/
+void	ft_free_textures(t_data *game);
 void	ft_scan_map(t_data *game);
 
 

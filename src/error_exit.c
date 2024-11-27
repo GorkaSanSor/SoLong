@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:58:54 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/26 12:19:24 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 09:54:19 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_free_map(char **map)
 {
 	int i;
 
+	if (!map)
+		return;
 	i = 0;
-	if (map[i] == NULL)
-		return ;
 	while (map[i])
 	{
 		free(map[i]);
@@ -50,23 +50,9 @@ static void	ft_game_free(t_data *game)
 		ft_free_map(game->map);
 	if (game->mlx)
 	{
-		if (game->textures.wall)
-            mlx_destroy_image(game->mlx, game->textures.wall);
-        if (game->textures.floor)
-            mlx_destroy_image(game->mlx, game->textures.floor);
-        if (game->textures.collectible)
-            mlx_destroy_image(game->mlx, game->textures.collectible);
-        if (game->textures.exit)
-            mlx_destroy_image(game->mlx, game->textures.exit);
-        if (game->textures.player_u)
-            mlx_destroy_image(game->mlx, game->textures.player_u);
-        if (game->textures.player_d)
-            mlx_destroy_image(game->mlx, game->textures.player_d);
-        if (game->textures.player_l)
-            mlx_destroy_image(game->mlx, game->textures.player_l);
-        if (game->textures.player_r)
-            mlx_destroy_image(game->mlx, game->textures.player_r);
+		ft_free_textures(game);
 		free(game->mlx);
+		game->mlx = NULL;
 	}
 }
 int	ft_exit_ok(t_data *game)
@@ -74,7 +60,10 @@ int	ft_exit_ok(t_data *game)
 	if (game->mlx && game->window)
 		mlx_destroy_window(game->mlx, game->window);
 	if (game->mlx)
-        mlx_destroy_display(game->mlx);
+	{
+		mlx_destroy_display(game->mlx);
+		game->mlx = NULL;
+	}
 	ft_game_free(game);
 	exit(0);
 	return (0);

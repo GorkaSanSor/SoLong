@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:44:46 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/26 11:10:14 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:07:32 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ char	**ft_copy_map(char **map)
 	int		rows;
 
 	if (!map)
-    return (NULL);
+		return (NULL);
 	rows = 0;
 	while (map[rows])
 		rows++;

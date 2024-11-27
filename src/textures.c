@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:04:27 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/26 10:57:57 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:33:00 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	ft_put_image(t_data *game, char *c, int x, int y)
 	if (!img)
 		ft_error_exit(INVALID_XPM, game);
 	mlx_put_image_to_window(game->mlx, game->window, img, x, y);
+	mlx_destroy_image(game->mlx, img);
 }
 
 /*
@@ -48,6 +49,26 @@ static void	ft_load_texture(t_data *game, char c, int x, int y)
 		ft_put_image(game, COLLECT, x, y);
 	else if (c == 'E')
 		ft_put_image(game, EXIT, x, y);
+}
+
+void ft_free_textures(t_data *game)
+{
+	if (game->textures.wall)
+		mlx_destroy_image(game->mlx, game->textures.wall);
+	if (game->textures.floor)
+		mlx_destroy_image(game->mlx, game->textures.floor);
+	if (game->textures.collectible)
+		mlx_destroy_image(game->mlx, game->textures.collectible);
+	if (game->textures.exit)
+		mlx_destroy_image(game->mlx, game->textures.exit);
+	if (game->textures.player_u)
+		mlx_destroy_image(game->mlx, game->textures.player_u);
+	if (game->textures.player_d)
+		mlx_destroy_image(game->mlx, game->textures.player_d);
+	if (game->textures.player_l)
+		mlx_destroy_image(game->mlx, game->textures.player_l);
+	if (game->textures.player_r)
+		mlx_destroy_image(game->mlx, game->textures.player_r);
 }
 
 /*

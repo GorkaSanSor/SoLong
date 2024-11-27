@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:05:20 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/26 12:21:53 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:32:56 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ static void	ft_init_struct(t_data *game)
 	game->mlx = NULL;
 	game->window = NULL;
 	game->map = NULL;
+	game->textures.wall = NULL;
+    game->textures.floor = NULL;
+    game->textures.collectible = NULL;
+    game->textures.exit = NULL;
+    game->textures.player_u = NULL;
+    game->textures.player_d = NULL;
+    game->textures.player_l = NULL;
+    game->textures.player_r = NULL;
 	game->map_rows = 0;
 	game->p_x_copy = 0;
 	game->p_y_copy = 0;

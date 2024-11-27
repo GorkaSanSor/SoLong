@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:53:08 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/26 11:18:17 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:20:51 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ static int ft_path_is_ok(t_data *game)
 		ft_free_map(map_copy);
 		return (1);
 	}
-
 	ft_copy_player_pos(game, &map_data);
+	ft_free_map(map_copy);
 	return (0);
 }
 
