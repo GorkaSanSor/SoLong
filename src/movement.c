@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:03:34 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/27 12:08:22 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:14:08 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	ft_unlock_exit(t_data *game)
 					mlx_put_image_to_window(game->mlx, game->window, img, \
 					(i * 80), (j * 80));
 		}
+		mlx_destroy_image(game->mlx, img);
 	}
 }
 /* Updates the player's position and checks for collectibles or exit */
@@ -50,11 +51,13 @@ static void	ft_move_player(t_data *game, int *x, int *y, char direction)
 		ft_exit_ok(game);
 	img = mlx_xpm_file_to_image(game->mlx, FLOOR, &img_width, &img_height);
 	mlx_put_image_to_window(game->mlx, game->window, img, (*x * 80), (*y * 80));
+	mlx_destroy_image(game->mlx, img);
 	if (game->map[*y][*x] == 'E')
 	{
 		img = mlx_xpm_file_to_image(game->mlx, EXIT, &img_width, &img_height);
 		mlx_put_image_to_window(game->mlx, game->window, img, (*x * 80), \
 		(*y * 80));
+		mlx_destroy_image(game->mlx, img);
 	}
 	ft_print_player(game, x, y, direction);
 }

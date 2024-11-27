@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:04:27 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/27 12:07:25 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:15:57 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	ft_load_texture(t_data *game, char c, int x, int y)
 		ft_put_image(game, COLLECT, x, y);
 	else if (c == 'E')
 		ft_put_image(game, EXIT, x, y);
+	else if (c == 'O')
+		ft_put_image(game, EXIT_O, x, y);
 }
 
 /* Frees all loaded textures */
@@ -53,6 +55,8 @@ void	ft_free_textures(t_data *game)
 		mlx_destroy_image(game->mlx, game->textures.collectible);
 	if (game->textures.exit)
 		mlx_destroy_image(game->mlx, game->textures.exit);
+	if (game->textures.exit_o)
+		mlx_destroy_image(game->mlx, game->textures.exit_o);
 	if (game->textures.player_u)
 		mlx_destroy_image(game->mlx, game->textures.player_u);
 	if (game->textures.player_d)
