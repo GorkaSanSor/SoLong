@@ -6,24 +6,19 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:53:08 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/27 10:20:51 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:10:40 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-This function compares the len of the first line of the map against further
-reads. If any line has different len than the first one, it means the map is
-not rectangular. ft_strlen has been modified to stop reading when a '\n' or
-'\0' (EOF) is found.
-*/
+/* Checks if the map is rectangular by comparing the length of each row */
 
 static int	ft_map_is_rect(char **map)
 {
 	int	line;
 	int	line_len;
-	
+
 	line = 0;
 	line_len = ft_line_lenght(map[line]);
 	if (line_len < 0)
@@ -37,30 +32,13 @@ static int	ft_map_is_rect(char **map)
 	return (0);
 }
 
-/*
-If the map is surronunded by walls (char '1'). line is the counter for rows,
-len is the counter for columns.
-First part checks first and final columns.
-		col 0					col len-1
-row 0:	| 1 |					| 1 |
-row 1:	| 1 |					| 1 |
-...		| 1 |					| 1 |
-...		| 1 |					| 1 |
-row i:	| 1 |					| 1 |
-After the first loop, the value i will be the number of rows
-Second loop checks chars in the mid positions of first and last rows
-row 0:			| 1 || 1 || 1 |
-row 1:
-...
-...
-row i:			| 1 || 1 || 1 |
-*/
+/* Checks if the map is surrounded by walls ('1') */
 
 static int	ft_map_walls(char **map)
 {
-	int line;
-	int len;
-	
+	int	line;
+	int	len;
+
 	line = 0;
 	len = ft_line_lenght(map[line]);
 	while (map[line])
@@ -77,15 +55,12 @@ static int	ft_map_walls(char **map)
 	}
 	return (0);
 }
-/*
-This functions checks if there are 0 or more than one P or E in the map.
-Several collectibles (C) are allowed
-*/
+/* Checks if there are 0 or more than one 'P' or 'E' in the map */
 
 static int	ft_right_obj(char **map, char c)
 {
 	int	obj_count;
-	
+
 	obj_count = ft_get_object(map, c);
 	if (obj_count == 0)
 		return (1);
@@ -94,32 +69,22 @@ static int	ft_right_obj(char **map, char c)
 	return (0);
 }
 
-/*
-1. Create a copy of the map, in order not to modify the original map
-2. Find the position of the player, it will be the start point
-3. Floodfill algorithm in map_copy
-4. Save the position of the player for later
-Note that we send the address of the structure because it was created in 
-this function
-*/
+/* Validates the path in the map using floodfill algorithm */
 
-static int ft_path_is_ok(t_data *game)
+static int	ft_path_is_ok(t_data *game)
 {
-	char    **map_copy;
-	t_pos   map_data;
-	
-	// Calcular automáticamente las dimensiones del mapa
+	char	**map_copy;
+	t_pos	map_data;
+
 	map_data.size_y = 0;
-	while (game->map[map_data.size_y])  // Contar filas
+	while (game->map[map_data.size_y])
 		map_data.size_y++;
 	map_data.size_x = 0;
-	if (game->map[0])  // Obtener columnas de la primera fila
+	if (game->map[0])
 		map_data.size_x = ft_strlen(game->map[0]);
-
 	map_copy = ft_copy_map(game->map);
 	ft_find_player(map_copy, &map_data);
 	ft_floodfill(map_copy, map_data, map_data.p_x, map_data.p_y);
-
 	if (ft_check_floodfill(map_copy) == 1)
 	{
 		ft_free_map(map_copy);
@@ -130,20 +95,11 @@ static int ft_path_is_ok(t_data *game)
 	return (0);
 }
 
-/*
-This function will check the different errors in the map
-Function receives a pointer to make sure we are working on the original
-structure and not in a local copy
-Subject requirements:
-Step 1. Map is not empty
-Step 2. Map is a rectangle and must be surrounded by walls
-Step 3. Check Player (P), Collectibles (C) and Exit (E)
-Step 4. There must be a valid path to collect and exit
-*/
+/* Checks for different errors in the map */
 
 int	ft_map_is_error(t_data *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (game->map[i] == NULL)

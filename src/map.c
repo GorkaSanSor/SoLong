@@ -6,16 +6,13 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:18:47 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/25 18:04:15 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:12:40 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-This function returns the length of a line up to the '\n', i.e, the lenght
-of the first line of the map
-*/
+/* Returns the length of a line up to the newline character */
 
 int	ft_line_lenght(char *str)
 {
@@ -23,26 +20,16 @@ int	ft_line_lenght(char *str)
 
 	i = 0;
 	if (str == NULL)
-		return -1;
+		return (-1);
 	while (str[i])
 	{
 		if (str[i] == '\n')
-			break;
+			break ;
 		i++;
 	}
 	return (i);
 }
-
-
-
-/*
-Calculate the number of rows to create the map
-1. Open the file to a fd. Name is the argv[1] which must be a .ber file
-2. Read line by line with GNL
-3. Loop until all the lines have been read.
-4. Save the number of rows
-5. Save the map data in a map variable inside the structure
-*/
+/* Saves the map from a file into the game structure */
 
 void	ft_save_map(t_data *game, char *str)
 {
@@ -63,19 +50,7 @@ void	ft_save_map(t_data *game, char *str)
 	game->map_rows = rows;
 	game->map = ft_map_fill(&rows, str);
 }
-
-
-
-/*
-This function starts to write the map line by line. It will also add the '\0'
-as the final char of the string.
-Step 1. Allocate memory for the map with malloc. It is a two dimensional array.
-So, we need to add '\0' at the end of each row and also at the end of the array
-of pointers (similar to ft_split)
-Step 2. Create the loop and load each line into the map. In the last position of
-the line add the '\0' char. After exiting the loop, add the '\0' to the array
-of pointers.
-*/
+/* Fills the map array with lines from the file */
 
 char	**ft_map_fill(int *rows, char *str)
 {
@@ -91,8 +66,8 @@ char	**ft_map_fill(int *rows, char *str)
 	while (row < *rows)
 	{
 		map[row] = gnl(fd);
-		if (!map[row])  // Depuración adicional
-            ft_printf("Error reading line %d from the map\n", row);
+		if (!map[row])
+			ft_printf("Error reading line %d from the map\n", row);
 		row++;
 	}
 	map[row] = NULL;
@@ -100,11 +75,7 @@ char	**ft_map_fill(int *rows, char *str)
 	return (map);
 }
 
-
-/* This function returns 1 as error if the floor is not a '0', as required
-by the subject. It loops all the positions within the wall. If it finds a
-char that is not allowed, the function returns 1 as error.
-*/
+/* Checks if the floor of the map contains only valid characters */
 
 int	ft_map_floor(char **map)
 {

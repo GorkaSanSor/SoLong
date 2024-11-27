@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 13:15:32 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/27 09:54:29 by gsantill         ###   ########.fr       */
+/*   Created: 2024/11/27 12:03:26 by gsantill          #+#    #+#             */
+/*   Updated: 2024/11/27 12:41:00 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include <stdlib.h>
 # include <fcntl.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
-#include "../mlx_linux/mlx.h"
-#include "../my_lib/ft_printf/ft_printf.h"
-#include "../my_lib/ft_gnl/gnl.h"
+# include <stddef.h>
+# include <stdlib.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include "../mlx_linux/mlx.h"
+# include "../my_lib/ft_printf/ft_printf.h"
+# include "../my_lib/ft_gnl/gnl.h"
 
 /*---------------------------------ERROR TYPES--------------------------------*/
 
@@ -73,7 +73,6 @@ typedef struct s_data
 	t_textures	textures;
 }	t_data;
 
-
 typedef struct s_pos
 {
 	int	p_x;
@@ -117,5 +116,7 @@ int		ft_input(int key, t_data *game);
 void	ft_free_textures(t_data *game);
 void	ft_scan_map(t_data *game);
 
+/*------------------------------------main.c----------------------------------*/
+void	ft_cleanup(t_data *game);
 
 #endif

@@ -6,17 +6,13 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:04:27 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/27 10:33:00 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:07:25 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-This function uses the mlx library functions to convert the xpm file
-to an image. mlx variable, pathfile, image width and height are required
-Remember 3 things: first start mlx, then window, then img over window.
-*/
+/* Converts the XPM file to an image and displays it in the window */
 
 static void	ft_put_image(t_data *game, char *c, int x, int y)
 {
@@ -30,12 +26,7 @@ static void	ft_put_image(t_data *game, char *c, int x, int y)
 	mlx_put_image_to_window(game->mlx, game->window, img, x, y);
 	mlx_destroy_image(game->mlx, img);
 }
-
-/*
-The function searches for the char in order to load the corresponding
-image. The path is a constant define in the header file. There is no
-image for the floor, but it can be added following the same logic
-*/
+/* Loads the corresponding image for a character on the map */
 
 static void	ft_load_texture(t_data *game, char c, int x, int y)
 {
@@ -51,7 +42,8 @@ static void	ft_load_texture(t_data *game, char c, int x, int y)
 		ft_put_image(game, EXIT, x, y);
 }
 
-void ft_free_textures(t_data *game)
+/* Frees all loaded textures */
+void	ft_free_textures(t_data *game)
 {
 	if (game->textures.wall)
 		mlx_destroy_image(game->mlx, game->textures.wall);
@@ -71,11 +63,7 @@ void ft_free_textures(t_data *game)
 		mlx_destroy_image(game->mlx, game->textures.player_r);
 }
 
-/*
-This function scans the map with a double loop, using i and j as counters.
-It sends the found char variable (as well as the coordinates x and y that
-determine the position of that char) to the function ft_load_texture.
-*/
+/* Scans the map and loads textures for each character */
 void	ft_scan_map(t_data *game)
 {
 	int	x;

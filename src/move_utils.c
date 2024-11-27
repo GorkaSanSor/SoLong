@@ -6,23 +6,18 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:22:39 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/27 10:28:55 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:06:54 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-This function chooses the corresponding image of the player depending on the
-key that has been pressed. xpm_path is initialized to NULL to avoid an error
-on the compiler saying that xpm_path "might not be initialized" in all the
-cases
-*/
+/* Chooses the corresponding player image based on the key pressed. */
 
 char	*ft_player_look(char direction)
 {
 	char	*xpm_path;
-	
+
 	xpm_path = NULL;
 	if (direction == 'U')
 		xpm_path = PLAYER_U;
@@ -35,18 +30,14 @@ char	*ft_player_look(char direction)
 	return (xpm_path);
 }
 
-/*
-This function prints the player after it has moved. Depending on the direction
-it prints the corresponding XPM image. Notice that x and y received are
-memory addresses
-*/
+/* Prints the player after it has moved, using the corresponding XPM image. */
 
 int	ft_print_player(t_data *game, int *x, int *y, char direction)
 {
 	void	*img;
 	int		img_height;
 	int		img_width;
-	
+
 	img = mlx_xpm_file_to_image(game->mlx, ft_player_look(direction), \
 	&img_width, &img_height);
 	if (!img)
@@ -67,10 +58,7 @@ int	ft_print_player(t_data *game, int *x, int *y, char direction)
 	return (0);
 }
 
-/*
-This function gets the position of the player in the map. It then updats the
-coordinates in the map_data struct and copies them to the game struct
-*/
+/* Updates the player's position in the game structure. */
 
 void	ft_copy_player_pos(t_data *game, t_pos *map_data)
 {
@@ -78,15 +66,13 @@ void	ft_copy_player_pos(t_data *game, t_pos *map_data)
 	game->p_y_copy = map_data->p_y;
 }
 
-/*
-Scans the map to check if there are still collectibles left
-*/
+/* Scans the map to check if there are still collectibles left */
 
 int	ft_find_c(char **map)
 {
 	int	x;
-	int y;
-	
+	int	y;
+
 	y = 0;
 	while (map[y])
 	{

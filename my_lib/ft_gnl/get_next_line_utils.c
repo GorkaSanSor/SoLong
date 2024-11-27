@@ -6,7 +6,7 @@
 /*   By: gsantill <gsantill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 10:35:40 by gsantill          #+#    #+#             */
-/*   Updated: 2024/11/25 16:35:27 by gsantill         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:41:45 by gsantill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ char	*ft_substr(const char *str, unsigned int start, size_t len)
 	sub[i] = '\0';
 	return (sub);
 }
-
-
 
 char	*ft_strchr(char *str, int c)
 {
